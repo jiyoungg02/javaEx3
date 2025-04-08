@@ -1,7 +1,15 @@
 package ch09.unit03;
 
 public class Ex14 {
-
+	public static void main(String[] args) {
+		User14 u = new User14();
+	      
+	    u.setValue(-5);
+	    int n = u.getValue();
+	    System.out.println(n);
+	      
+	    System.out.println("end...");
+	}
 }
 
 //잘못 작성한 코드
