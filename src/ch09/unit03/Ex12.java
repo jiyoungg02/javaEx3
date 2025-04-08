@@ -12,6 +12,7 @@ public class Ex12 {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("end...");
 	}
 }
 
@@ -26,6 +27,7 @@ class User12{
 		if(value < 0) {
 			// 강제로 checked exception 을 발생 시킴
 			throw new Exception("0 이상만 가능합니다.");
+				// catch로 예외를 잡아야 하는데, 호출하는 곳에서 작업해야 함
 		}
 		
 		this.value = value;
