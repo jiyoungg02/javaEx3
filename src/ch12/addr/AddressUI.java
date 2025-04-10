@@ -2,6 +2,8 @@ package ch12.addr;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /*
@@ -21,6 +23,7 @@ import java.util.List;
 public class AddressUI {
 	private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	private Address addr = new AddressImpl();
+	private DateUtil util = new DateUtil();
 	
 	public void menu() {
 		int ch;
@@ -52,9 +55,11 @@ public class AddressUI {
 	
 	protected void insert() {
 		System.out.println("\n[데이터 등록]");
+
+		AddressVO vo = new AddressVO();
+		String s;
 		
 		try {
-			AddressVO vo = new AddressVO();
 			
 			System.out.print("이름 ? ");
 			vo.setName(br.readLine());
@@ -64,12 +69,26 @@ public class AddressUI {
 			
 			System.out.print("생년월일 ? ");
 			vo.setBirth(br.readLine());
+			if(! util.isValidDate(vo.getBirth())) {
+				System.out.println("등록 실패-날짜 입력 형식 오류 입니다.\n");
+				return;
+			}
 			
 			System.out.print("주소 ? ");
 			vo.setAddress(br.readLine());
 			
-			vo.setStartDate();
+			LocalDate localDate = LocalDate.now();
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			s = localDate.format(dtf);
+			vo.setStartDate(s);
 			
+			addr.insertAddress(vo);
+			
+			System.out.println("등록이 완료 되었습니다. !!!");
+		/*	
+		}catch (MyDuplicationException e) {
+			System.out.println("등록된 자료 입니다.");
+		*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

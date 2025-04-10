@@ -3,19 +3,20 @@ package ch12.addr;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch12.addr2.MyDuplicationException;
 
 public class AddressImpl implements Address {
 	private List<AddressVO> list = new ArrayList<AddressVO>();
 
 	@Override
-	public void insertAddress(AddressVO vo){
+	public void insertAddress(AddressVO vo) throws MyDuplicationException {
 		if(findById(vo.getName(), vo.getTel()) != null) {
-			//throw new MyDuplicationException("등록된 사람입니다.");
+			throw new MyDuplicationException("등록된 자료 입니다.");
 		}
 		
 		list.add(vo);
 	}
-
+	
 	@Override
 	public AddressVO findById(String name, String tel) {
 		for(AddressVO vo : list) {
@@ -36,7 +37,7 @@ public class AddressImpl implements Address {
 		List<AddressVO> searchList = new ArrayList<AddressVO>();
 		
 		for(AddressVO vo : list) {
-			if(vo.getName().indexOf(name) >= 0) {
+			if(vo.getName().indexOf(name) != -1) {
 				searchList.add(vo);
 			}
 		}
@@ -50,5 +51,4 @@ public class AddressImpl implements Address {
 		
 		return list.remove(vo);
 	}
-	
 }
