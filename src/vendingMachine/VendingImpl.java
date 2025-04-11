@@ -5,8 +5,7 @@ import java.util.List;
 
 public class VendingImpl implements Vending {
 	private List<VendingVO> list = new ArrayList<VendingVO>();
-	private List<VendingVO> list2 = new ArrayList<VendingVO>();
-
+	
 	@Override
 	public void insertVending(VendingVO vo) {
 		list.add(vo);
@@ -65,18 +64,6 @@ public class VendingImpl implements Vending {
 	public boolean deleteVending(String number) {
 		VendingVO vo = findById(number);
 		return list.remove(vo);
-	}
-
-	
-	@Override
-	public void vinsertVending(VendingVO vo2) {
-		list2.add(vo2);
-	}
-
-
-	@Override
-	public List<VendingVO> MoneyAll() {
-		return list2;
 	}
 	
 }
